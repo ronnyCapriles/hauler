@@ -1,23 +1,28 @@
-"use client"; // Required for client-side interactivity
+"use client";
 
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 
+interface FormData {
+  meetingType: string;
+  date: string;
+  time: string;
+  email: string;
+}
+
 export default function MeetForm() {
-  // State to store form data
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     meetingType: "",
     date: "",
     time: "",
-    email: "", // Added email field
+    email: "",
   });
 
-  // Handle input changes
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -25,8 +30,7 @@ export default function MeetForm() {
     }));
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Appointment Data:", formData);
   };
@@ -34,14 +38,12 @@ export default function MeetForm() {
   return (
     <div className="container mx-auto p-4">
       <Card>
-        
         <CardContent>
           <form onSubmit={handleSubmit}>
             {/* Meeting Type and Email Section */}
             <div className="space-y-4 pt-6">
               <h3 className="text-xl font-semibold">Tipo de Reunión y Correo Electrónico</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Email Field (First on mobile, second on desktop) */}
                 <div className="order-2 md:order-1">
                   <Label htmlFor="email">Correo Electrónico</Label>
                   <Input
@@ -53,10 +55,10 @@ export default function MeetForm() {
                   />
                 </div>
 
-                {/* Meeting Type Field (Second on mobile, first on desktop) */}
                 <div className="order-1 md:order-2">
                   <Label htmlFor="meetingType">Tipo de Reunión</Label>
                   <Select
+                    value={formData.meetingType}
                     onValueChange={(value) =>
                       setFormData((prevData) => ({
                         ...prevData,
@@ -103,11 +105,12 @@ export default function MeetForm() {
 
             {/* Submit Button */}
             <div className="mt-8">
-              <input
+              <Button
                 type="submit"
-                value="Confirmar Cita"
-                className="w-full bg-primary_hauler text-white text-base py-2 px-6 rounded-lg hover:bg-primary_hauler/90 cursor-pointer font-bold transition-colors duration-300"
-              />
+                className="w-full bg-primary_hauler text-white text-base py-2 px-6 rounded-lg hover:bg-primary_hauler/90 font-bold transition-colors duration-300"
+              >
+                Confirmar Cita
+              </Button>
             </div>
           </form>
         </CardContent>
