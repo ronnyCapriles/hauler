@@ -1,14 +1,24 @@
-"use client"; // Required for client-side interactivity
+"use client";
 
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+
+interface FormData {
+  fullName: string;
+  rut: string;
+  phone: string;
+  email: string;
+  vehicleType: string;
+  brandModel: string;
+  year: string;
+  capacity: string;
+}
 
 export default function EquipmentForm() {
-  // State to store form data
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     fullName: "",
     rut: "",
     phone: "",
@@ -17,28 +27,17 @@ export default function EquipmentForm() {
     brandModel: "",
     year: "",
     capacity: "",
-    photos: null,
   });
 
-  // Handle input changes
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [id]: value,
+      [id]: id === 'year' ? value.toString() : value,
     }));
   };
 
-  // Handle file input changes
-  const handleFileChange = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      photos: e.target.files,
-    }));
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form Data:", formData);
   };
@@ -138,11 +137,12 @@ export default function EquipmentForm() {
 
             {/* Submit Button */}
             <div className="mt-8">
-              <input
+              <Button
                 type="submit"
-                value="Confirmar Cita"
                 className="w-full bg-primary_hauler text-white text-base py-2 px-6 rounded-lg hover:bg-primary_hauler/90 cursor-pointer font-bold transition-colors duration-300"
-              />
+              >
+                Confirmar Cita
+              </Button>
             </div>
           </form>
         </CardContent>
