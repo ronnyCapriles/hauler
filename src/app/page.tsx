@@ -19,7 +19,7 @@ export default function Home() {
       <HeroSection />
 
       {/* Solicita Cotización */}
-      <section className="container mx-auto px-4 py-8">
+      <section className="container mx-auto px-4 py-8 mt-8">
         <h2 className="text-center text-black text-2xl lg:text-4xl font-bold ">
           Solicita una cotización personalizada en minutos
         </h2>
