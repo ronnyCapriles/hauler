@@ -1,7 +1,7 @@
 "use client"
 export default function Footer() {
     return (
-      <div className="bg-primary_hauler text-white py-8 sm:py-16 mt-4">
+      <div className="bg-gray-900 text-white py-8 sm:py-16 ">
         {/* Main Footer Content */}
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between space-y-8 md:space-y-0">

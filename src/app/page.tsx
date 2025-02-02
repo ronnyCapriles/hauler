@@ -1,55 +1,52 @@
-"use client"
+"use client";
 
-import HeroSection from "../components/heroSection"
-import First from "../components/cards/first"
- 
+import HeroSection from "../components/heroSection";
+import TransportServices from "../components/cards/transportationServices";
+import MeetForm from "../components/forms/meetForm";
+import EquipmentForm from "../components/forms/equipmentForm";
+
 export default function Home() {
   return (
+    <main>
+      {/* Smooth scrolling for anchor links */}
+      <style jsx global>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
 
-      <main className="w-full flex flex-col gap-8 pt-16 row-start-2 items-center sm:items-start">
-        <style jsx global>{`
-            html {
-            scroll-behavior: smooth;
-            }
-        `}</style>
-        <HeroSection/>
-        <div className="w-full flex justify-center items-center py-6">
-          <h2 className="text-primary_hauler text-4xl lg:text-5xl font-bold text-gray-900">¿Por qué Hauler?</h2>
+      {/* Hero Section */}
+      <HeroSection />
+
+      {/* Solicita Cotización */}
+      <section className="container mx-auto px-4 py-8">
+        <h2 className="text-center text-black text-2xl lg:text-4xl font-bold ">
+          Solicita una cotización personalizada en minutos
+        </h2>
+        <div className="max-w-4xl mx-auto">
+          <MeetForm />
         </div>
+      </section>
 
-        <div className="w-full flex flex-col md:flex-row justify-evenly items-center pb-12 pt-0 sm:pt-12 px-4">
+      {/* Servicios (Transporte de Pasajeros / Carga) */}
+      <section className="container mx-auto px-4 py-8">
+        <TransportServices />
+      </section>
 
-          <div className="w-4/12"> 
-            <First
-              imgPath="/logo.svg" 
-              imgH="50px"
-              title="Seguridad Primero"
-              description="Conductores certificados y vehículos completamente cumplidores que garantizan tu tranquilidad."
-            />
+      {/* Ofrecer Vehículo */}
+      <section className="bg-primary_hauler py-8">
+        <div className="container mx-auto px-4">
+          <h2 className="text-white text-2xl text-center lg:text-4xl font-bold mb-2">
+            ¿Tienes un Vehículo para ofrecer?
+          </h2>
+          <p className="text-white text-base text-center lg:text-2xl">
+            Únete a nuestra red de proveedores y genera ingresos
+          </p>
+          <div className="max-w-4xl mx-auto">
+            <EquipmentForm />
           </div>
-          
-
-          <div className="w-4/12"> 
-            <First
-              imgPath="/logo.svg" 
-              imgH="50px" 
-              title="Confiabilidad"
-              description="Puntuales, siempre. Cuenta con nuestro compromiso de puntualidad."
-            />
-          </div>
-          
-
-          <div className="w-4/12"> 
-            <First
-              imgPath="/logo.svg" 
-              imgH="50px"
-              title="Soluciones Personalizadas"
-              description="Servicios personalizados diseñados para las necesidades de tu industria y negocio."
-            />
-          </div>
-          
         </div>
-      </main>
-
+      </section>
+    </main>
   );
 }
